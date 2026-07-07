@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학생용 보조배터리 대여</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="student">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">School Power Bank</p>
+          <h1>학생 대여 화면</h1>
+        </div>
+        <a class="link-chip" id="admin-link" href="./admin.html">관리자</a>
+      </header>
+
+      <section class="panel">
+        <h2>대여 정보</h2>
+        <div class="form-grid">
+          <label>
+            학번
+            <div class="student-id-selects">
+              <select id="student-id-prefix">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+              <select id="student-id-group">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+              <select id="student-id-tail">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+            <p id="student-id-preview" class="message"></p>
+          </label>
+          <label>
+            배터리 번호
+            <input id="battery-code-input" type="text" inputmode="numeric" placeholder="예) 1" />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="borrow-btn" class="btn" type="button">대여하기</button>
+          <button id="return-btn" class="btn btn-muted" type="button">반납하기</button>
+        </div>
+
+        <p id="borrow-due-info" class="message" role="status"></p>
+        <p class="message" role="status">한 학번당 배터리는 1개만 대여할 수 있습니다.</p>
+        <p id="student-message" class="message" role="status"></p>
+      </section>
+
+      <section class="panel compact">
+        <h2>현재 대여 현황</h2>
+        <div class="stat-grid" id="student-stats"></div>
+      </section>
+
+      <section class="panel compact">
+        <h2>내 최근 기록</h2>
+        <ul id="student-history" class="history-list"></ul>
+      </section>
+
+      <section id="admin-auth-modal" class="auth-overlay hidden" aria-live="polite" aria-modal="true" role="dialog">
+        <article class="auth-card">
+          <h2>관리자 인증</h2>
+          <p>관리자 화면으로 이동하려면 비밀번호를 입력하세요.</p>
+          <label>
+            비밀번호
+            <input id="admin-password-input" type="password" inputmode="numeric" placeholder="0000" />
+          </label>
+          <p id="admin-auth-message" class="message" role="status"></p>
+          <div class="button-row">
+            <button id="admin-auth-confirm" class="btn" type="button">확인</button>
+            <button id="admin-auth-cancel" class="btn btn-ghost" type="button">취소</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
