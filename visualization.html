@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>보조배터리 앱 시각화</title>
+    <style>
+      :root {
+        --bg: #f6f8fc;
+        --card: #ffffff;
+        --border: #d9e2f0;
+        --ink: #213047;
+        --accent: #2f6fed;
+        --accent2: #18a957;
+        --warn: #f59e0b;
+        --danger: #e05252;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.5;
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1, h2 {
+        margin: 0 0 12px;
+      }
+
+      .intro {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 18px rgba(33, 48, 71, 0.06);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(33, 48, 71, 0.04);
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .badge.student { background: #eaf4ff; color: var(--accent); }
+      .badge.admin { background: #eaf9f0; color: var(--accent2); }
+      .badge.data { background: #fff6dd; color: #8b5e00; }
+
+      .flow {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 20px;
+      }
+
+      .node-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+
+      .node {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: #fbfcff;
+        min-width: 180px;
+        text-align: center;
+      }
+
+      .arrow {
+        color: var(--accent);
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .data-model {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .data-box {
+        background: #fbfcff;
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        padding: 12px;
+      }
+
+      ul {
+        margin: 6px 0 0 18px;
+        padding: 0;
+      }
+
+      .small {
+        font-size: 13px;
+        color: #56657a;
+      }
+
+      .function-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .function-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="intro">
+        <h1>보조배터리 앱 구조 시각화</h1>
+        <p>이 페이지는 학생 화면, 관리자 화면, 데이터 저장 방식, 그리고 주요 함수 흐름을 한눈에 볼 수 있게 정리한 문서입니다.</p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <span class="badge student">학생 화면</span>
+          <h2>학생이 쓰는 흐름</h2>
+          <ul>
+            <li>학번/이름 선택</li>
+            <li>배터리 번호 입력</li>
+            <li>대여 또는 반납 실행</li>
+            <li>반납 예정 시간 표시</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge admin">관리자 화면</span>
+          <h2>관리자가 쓰는 흐름</h2>
+          <ul>
+            <li>비밀번호 인증</li>
+            <li>배터리 상태/통계 확인</li>
+            <li>배터리 이름 변경 또는 삭제</li>
+            <li>이력/보관 기록 확인</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge data">데이터 저장</span>
+          <h2>저장소 구조</h2>
+          <ul>
+            <li>localStorage에 JSON 형태로 저장</li>
+            <li>batteries 배열과 logs 배열 관리</li>
+            <li>로그는 90일 보관 후 정리됨</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="flow">
+        <h2>전체 흐름도</h2>
+        <div class="node-row">
+          <div class="node">학생 페이지</div>
+          <div class="arrow">→</div>
+          <div class="node">입력값 검증</div>
+          <div class="arrow">→</div>
+          <div class="node">대여/반납 처리</div>
+          <div class="arrow">→</div>
+          <div class="node">localStorage 저장</div>
+        </div>
+        <div class="node-row">
+          <div class="node">관리자 페이지</div>
+          <div class="arrow">→</div>
+          <div class="node">비밀번호 인증</div>
+          <div class="arrow">→</div>
+          <div class="node">배터리 관리</div>
+          <div class="arrow">→</div>
+          <div class="node">기록/통계 표시</div>
+        </div>
+      </section>
+
+      <section class="flow">
+        <h2>데이터 모델</h2>
+        <div class="data-model">
+          <div class="data-box">
+            <strong>Battery</strong>
+            <ul>
+              <li>id: 배터리 번호</li>
+              <li>name: 표시 이름</li>
+              <li>status: available / rented</li>
+              <li>borrower, borrowedAt, dueAt</li>
+            </ul>
+          </div>
+          <div class="data-box">
+            <strong>Log</strong>
+            <ul>
+              <li>at: 발생 시각</li>
+              <li>action: 이벤트 종류</li>
+              <li>detail: 세부 내용</li>
+            </ul>
+          </div>
+          <div class="data-box">
+            <strong>Stats</strong>
+            <ul>
+              <li>total: 전체 배터리 수</li>
+              <li>available: 대여 가능 수</li>
+              <li>rented: 대여 중 수</li>
+              <li>overdue: 연체 수</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="flow">
+        <h2>app.js 핵심 함수 지도</h2>
+        <div class="function-list">
+          <div class="function-item">
+            <strong>초기화/저장</strong>
+            <ul>
+              <li>createInitialData</li>
+              <li>loadData</li>
+              <li>saveData</li>
+              <li>addLog</li>
+            </ul>
+          </div>
+          <div class="function-item">
+            <strong>배터리 대여/반납</strong>
+            <ul>
+              <li>borrowBattery</li>
+              <li>returnBattery</li>
+              <li>getDueAtForToday</li>
+            </ul>
+          </div>
+          <div class="function-item">
+            <strong>화면 렌더링</strong>
+            <ul>
+              <li>renderStatCards</li>
+              <li>renderHistory</li>
+              <li>initStudentPage</li>
+              <li>initAdminPage</li>
+            </ul>
+          </div>
+          <div class="function-item">
+            <strong>관리자 인증</strong>
+            <ul>
+              <li>requestAdminAccess</li>
+              <li>hasAdminAccess</li>
+              <li>getAdminPassword</li>
+              <li>setAdminPassword</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro">
+        <h2>확인 포인트</h2>
+        <p class="small">이 앱은 정적 페이지 기반이라 브라우저에서 바로 열 수 있으며, 상태는 모두 로컬 저장소에 남습니다. 데이터가 꼬였을 때는 브라우저의 로컬 스토리지를 비우면 초기화할 수 있습니다.</p>
+      </section>
+    </main>
+  </body>
+</html>

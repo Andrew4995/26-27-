@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>보조배터리 대여 서비스</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --ink: #213047;
+        --accent: #2563eb;
+        --accent2: #16a34a;
+        --border: #d7e2f1;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(560px, 100%);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 10px 30px rgba(33, 48, 71, 0.08);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+
+      p {
+        margin: 0 0 18px;
+        color: #526173;
+        line-height: 1.6;
+      }
+
+      .buttons {
+        display: grid;
+        gap: 12px;
+      }
+
+      .btn {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        padding: 14px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .btn.student {
+        background: var(--accent);
+      }
+
+      .btn.admin {
+        background: var(--accent2);
+      }
+
+      .small {
+        margin-top: 14px;
+        font-size: 13px;
+        color: #6b7890;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>보조배터리 대여 서비스</h1>
+      <p>학생은 배터리를 대여/반납하고, 관리자는 현황과 기록을 확인할 수 있는 간단한 웹 서비스입니다.</p>
+      <div class="buttons">
+        <a class="btn student" href="./student.html">학생용 화면으로 이동</a>
+        <a class="btn admin" href="./admin.html">관리자 화면으로 이동</a>
+      </div>
+      <p class="small">이 페이지는 로컬 서버에서 열면 바로 사용할 수 있습니다.</p>
+    </main>
+  </body>
+</html>

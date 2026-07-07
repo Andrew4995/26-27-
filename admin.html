@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 보조배터리 대여</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="admin">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">School Power Bank</p>
+          <h1>관리자 화면</h1>
+        </div>
+        <a class="link-chip" href="./student.html">학생 화면</a>
+      </header>
+
+      <section class="panel compact">
+        <p id="admin-auth-notice" class="message">관리자 인증이 필요합니다. 아래 버튼으로 인증해 주세요.</p>
+        <button id="admin-auth-open" class="btn" type="button">관리자 인증</button>
+        <div data-admin-only class="hidden">
+          <h2>스테이션 통계</h2>
+          <div class="stat-grid" id="admin-stats"></div>
+        </div>
+      </section>
+
+      <section class="panel compact" data-admin-only>
+        <h2>배터리 관리</h2>
+        <div class="battery-manage-controls">
+          <input id="battery-add-count" type="number" min="1" max="20" value="1" />
+          <button id="admin-add-battery" class="btn" type="button">배터리 추가</button>
+        </div>
+        <label class="checkbox-row top-gap">
+          <input id="show-all-battery-history" type="checkbox" />
+          전체 기록 보기
+        </label>
+        <div id="battery-list" class="battery-list"></div>
+      </section>
+
+      <section class="panel compact" data-admin-only>
+        <h2>관리자 비밀번호 변경</h2>
+        <input id="admin-password-change-input" type="password" placeholder="새 비밀번호 입력" />
+        <div class="button-row compact">
+          <button id="admin-password-save" class="btn" type="button">비밀번호 변경</button>
+        </div>
+        <p id="admin-password-message" class="message" role="status"></p>
+      </section>
+
+      <section class="panel compact" data-admin-only>
+        <h2>최근 기록</h2>
+        <p class="message">7일이 지난 기록은 보관 기록으로 이동하고, 90일이 지나면 자동 삭제됩니다.</p>
+        <div class="button-row compact">
+          <button id="toggle-recent-logs" class="btn btn-ghost" type="button">전체 기록 보기</button>
+        </div>
+        <ul id="admin-logs" class="history-list"></ul>
+      </section>
+
+      <section class="panel compact" data-admin-only>
+        <h2>보관 기록</h2>
+        <ul id="archived-logs" class="history-list hidden"></ul>
+      </section>
+
+      <section id="admin-auth-modal" class="auth-overlay hidden" aria-live="polite" aria-modal="true" role="dialog">
+        <article class="auth-card">
+          <h2>관리자 인증</h2>
+          <p>관리자 화면 접근을 위해 비밀번호를 입력하세요.</p>
+          <label>
+            비밀번호
+            <input id="admin-password-input" type="password" inputmode="numeric" placeholder="0000" />
+          </label>
+          <p id="admin-auth-message" class="message" role="status"></p>
+          <div class="button-row">
+            <button id="admin-auth-confirm" class="btn" type="button">확인</button>
+            <button id="admin-auth-cancel" class="btn btn-ghost" type="button">취소</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
